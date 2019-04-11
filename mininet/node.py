@@ -1169,8 +1169,7 @@ class OVSSwitch( Switch ):
 
     def bridgeOpts( self ):
         "Return OVS bridge options"
-        opts = ( ' other_config:datapath-id=%s' % self.dpid +
-                 ' fail_mode=%s' % self.failMode )
+        opts = ( ' fail_mode=%s' % self.failMode )
         if not self.inband:
             opts += ' other-config:disable-in-band=true'
         if self.datapath == 'user':
@@ -1220,7 +1219,7 @@ class OVSSwitch( Switch ):
         if not self.batch:
             for intf in self.intfList():
                 self.TCReapply( intf )
-
+    
     def setMAC(self, mac):
         # set mac for ovs bridge && control dpid
         self.vsctl('set','bridge',self,"other-config:hwaddr=%s"%(mac))
