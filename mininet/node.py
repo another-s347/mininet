@@ -1221,6 +1221,10 @@ class OVSSwitch( Switch ):
             for intf in self.intfList():
                 self.TCReapply( intf )
 
+    def setMAC(self, mac):
+        # set mac for ovs bridge && control dpid
+        self.vsctl('set','bridge',self,"other-config:hwaddr=%s"%(mac))
+
     # This should be ~ int( quietRun( 'getconf ARG_MAX' ) ),
     # but the real limit seems to be much lower
     argmax = 128000
